@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class NpsHealth : MonoBehaviour
 {
+    private HealthSystemComponent hpComponent;
+    private HealthSystem healthSystem;
     public int maxHealth = 100;
     public int currentHealth;
 
     private void Start()
     {
+        hpComponent = GetComponent<HealthSystemComponent>();
+        healthSystem =  hpComponent.GetHealthSystem();
         currentHealth = maxHealth;
     }
 
@@ -17,6 +21,7 @@ public class NpsHealth : MonoBehaviour
         if (collision.gameObject.CompareTag("Bullet"))
         {
             TakeDamage(10);
+            healthSystem.Damage(10f/*bullet.damageamount*/);
         }
     }
 
